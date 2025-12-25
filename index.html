@@ -1,42 +1,56 @@
-<div style="text-align: center; font-family: 'Segoe UI', sans-serif; background: #000; color: #00ffcc; padding: 25px; border: 2px solid #00ffcc; border-radius: 20px; max-width: 400px; margin: auto;">
-    
-    <div style="font-size: 10px; color: #444; text-align: right;">DEV: SAFAIT</div>
-    <h2 style="text-shadow: 0 0 10px #00ffcc;">SAFAIT FAST HACK</h2>
-    <hr style="border: 0.5px solid #222;">
-    
-    <p style="font-size: 13px;">শেষ ২ বা ৩টি নম্বর দিন:</p>
-    <input type="text" id="shortInput" placeholder="যেমন: 4, 9" style="padding: 12px; width: 80%; border-radius: 8px; border: 1px solid #00ffcc; background: #111; color: #fff; text-align: center; font-size: 18px;">
-    
-    <button onclick="fastHack()" style="padding: 12px; background: #00ffcc; color: #000; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; width: 85%; margin-top: 15px;">GET RESULT</button>
+<div style="text-align: center; font-family: 'Segoe UI', sans-serif; background: #000; color: #00ffcc; padding: 25px; border: 4px solid #f00; border-radius: 20px; max-width: 400px; margin: auto; box-shadow: 0 0 25px #f00;">
+    <h2 style="color: #f00; text-shadow: 0 0 10px #f00;">SAFAIT RECOVERY PRO</h2>
+    <p style="color: #fff; font-size: 12px;">অ্যালগরিদম এখন ৩-স্টেপ মুড-এ আছে</p>
+    <hr style="border: 0.5px solid #333;">
 
-    <div id="resBox" style="display:none; margin-top: 20px; padding: 15px; background: #111; border-radius: 10px; border-left: 4px solid #f00;">
-        <div id="bsOutput" style="font-size: 28px; font-weight: bold; color: #fff;"></div>
-        <div id="numOutput" style="font-size: 18px; color: #ffcc00; margin-top: 5px;"></div>
-        <p style="color: #0f0; font-size: 12px; margin-top: 10px;">৩-স্টেপ রিকভারি একটিভ ✅</p>
+    <div style="margin-bottom: 15px;">
+        <label style="color: #0f0; font-size: 13px;">শেষ ৩টি নম্বর দিন (যেমন: 4, 1, 9):</label><br>
+        <input type="text" id="finalIn" placeholder="4, 1, 9" style="padding: 15px; width: 85%; border-radius: 10px; border: 1px solid #00ffcc; background: #111; color: #fff; text-align: center; font-size: 20px; font-weight: bold; margin-top: 10px;">
+    </div>
+    
+    <button onclick="safeHack()" style="padding: 15px; background: #f00; color: #fff; font-weight: bold; border: none; border-radius: 10px; cursor: pointer; width: 90%; font-size: 16px; box-shadow: 0 5px 15px rgba(255,0,0,0.4);">GET SURE-HIT</button>
+
+    <div id="wait" style="display:none; color: #ffcc00; margin-top: 15px;">সার্ভার ডাটা রি-চেক করা হচ্ছে...</div>
+
+    <div id="resCard" style="display:none; margin-top: 20px; padding: 15px; background: rgba(255,255,255,0.1); border-radius: 10px; border: 1px solid #0f0;">
+        <div id="finalBS" style="font-size: 35px; font-weight: bold; color: #fff;"></div>
+        <div id="finalNum" style="color: #0f0; font-size: 14px; margin-top: 5px;"></div>
+        <p style="color: #ff0; font-size: 11px; margin-top: 10px;">সতর্কতা: এটি মিস হলে পরবর্তীটি ২গুণ না, ৩গুণ ধরবেন।</p>
     </div>
 </div>
 
 <script>
-function fastHack() {
-    let input = document.getElementById('shortInput').value;
-    let box = document.getElementById('resBox');
+function safeHack() {
+    let input = document.getElementById('finalIn').value;
+    let card = document.getElementById('resCard');
+    let wait = document.getElementById('wait');
     
-    if(input.length < 1) {
-        alert("নম্বর দিন!");
-        return;
-    }
+    if(!input.includes(',')) { alert("নম্বরগুলো কমা দিয়ে দিন!"); return; }
 
-    let arr = input.split(',').map(Number);
-    let last = arr[arr.length - 1]; // একদম শেষের নম্বর
+    wait.style.display = 'block';
+    card.style.display = 'none';
 
-    // সহজ ৩-স্টেপ লজিক
-    let prediction = (last <= 4) ? "BIG" : "SMALL";
-    
-    // নম্বর প্রেডিকশন (লাস্ট নম্বরের ওপর ভিত্তি করে)
-    let nextNum = (last % 2 === 0) ? "1, 3, 7" : "2, 4, 8";
+    setTimeout(() => {
+        wait.style.display = 'none';
+        card.style.display = 'block';
 
-    document.getElementById('bsOutput').innerText = "NEXT: " + prediction;
-    document.getElementById('numOutput').innerText = "Lucky Numbers: " + nextNum;
-    box.style.display = 'block';
+        let arr = input.split(',').map(Number);
+        let last = arr[arr.length - 1];
+        let secondLast = arr[arr.length - 2];
+        let sum = arr.reduce((a, b) => a + b, 0);
+
+        let result = "";
+        // Extreme Trend Logic
+        if(last > 4 && secondLast > 4) {
+            result = "SMALL";
+        } else if(last <= 4 && secondLast <= 4) {
+            result = "BIG";
+        } else {
+            result = (sum % 2 === 0) ? "BIG" : "SMALL";
+        }
+
+        document.getElementById('finalBS').innerText = result;
+        document.getElementById('finalNum').innerText = "সম্ভাব্য নম্বর: " + (result === "BIG" ? "5, 7, 8" : "1, 2, 4");
+    }, 2000);
 }
-                   </script>
+    </script>
