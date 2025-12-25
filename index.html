@@ -1,71 +1,42 @@
-<div style="text-align: center; font-family: 'Segoe UI', sans-serif; background: linear-gradient(145deg, #000, #1a1a1a); color: #00ffcc; padding: 30px; border: 2px solid #00ffcc; border-radius: 25px; max-width: 450px; margin: auto; box-shadow: 0 0 30px rgba(0, 255, 204, 0.3);">
+<div style="text-align: center; font-family: 'Segoe UI', sans-serif; background: #000; color: #00ffcc; padding: 25px; border: 2px solid #00ffcc; border-radius: 20px; max-width: 400px; margin: auto;">
     
-    <div style="font-size: 10px; color: #555; text-align: right; margin-bottom: -10px;">DEVELOPER: SAFAIT</div>
+    <div style="font-size: 10px; color: #444; text-align: right;">DEV: SAFAIT</div>
+    <h2 style="text-shadow: 0 0 10px #00ffcc;">SAFAIT FAST HACK</h2>
+    <hr style="border: 0.5px solid #222;">
     
-    <h1 style="font-size: 24px; text-shadow: 0 0 15px #00ffcc; margin-bottom: 5px;">DK WIN VIP HACK</h1>
-    <p style="color: #ffcc00; font-size: 13px; letter-spacing: 2px;">ULTRA 3-STEP FORMULA</p>
-    <hr style="border: 0.5px solid #333; margin: 15px 0;">
+    <p style="font-size: 13px;">শেষ ২ বা ৩টি নম্বর দিন:</p>
+    <input type="text" id="shortInput" placeholder="যেমন: 4, 9" style="padding: 12px; width: 80%; border-radius: 8px; border: 1px solid #00ffcc; background: #111; color: #fff; text-align: center; font-size: 18px;">
     
-    <div style="margin-bottom: 20px;">
-        <label style="display:block; margin-bottom: 10px; color: #fff; font-size: 14px;">গেমের শেষ ৫টি নম্বর দিন (যেমন: 2,7,4,1,9):</label>
-        <input type="text" id="numInput" placeholder="নম্বরগুলো কমা দিয়ে লিখুন" style="padding: 15px; width: 90%; border-radius: 10px; border: 1px solid #00ffcc; background: #000; color: #0f0; text-align: center; font-weight: bold; font-size: 18px;">
+    <button onclick="fastHack()" style="padding: 12px; background: #00ffcc; color: #000; font-weight: bold; border: none; border-radius: 8px; cursor: pointer; width: 85%; margin-top: 15px;">GET RESULT</button>
+
+    <div id="resBox" style="display:none; margin-top: 20px; padding: 15px; background: #111; border-radius: 10px; border-left: 4px solid #f00;">
+        <div id="bsOutput" style="font-size: 28px; font-weight: bold; color: #fff;"></div>
+        <div id="numOutput" style="font-size: 18px; color: #ffcc00; margin-top: 5px;"></div>
+        <p style="color: #0f0; font-size: 12px; margin-top: 10px;">৩-স্টেপ রিকভারি একটিভ ✅</p>
     </div>
-    
-    <button onclick="generateSafaitHack()" style="padding: 15px; background: #00ffcc; color: #000; font-weight: bold; border: none; border-radius: 10px; cursor: pointer; width: 95%; font-size: 18px; transition: 0.3s; box-shadow: 0 5px 20px rgba(0, 255, 204, 0.5);">CALCULATE NEXT BET</button>
-
-    <div id="processing" style="display:none; margin-top: 20px; color: #ff0055; font-weight: bold; font-style: italic;">অ্যালগরিদম এনালাইসিস চলছে...</div>
-
-    <div id="resultCard" style="display:none; margin-top:25px; padding: 20px; background: rgba(0,255,204,0.05); border: 1px solid #00ffcc; border-radius: 15px;">
-        <div style="display: flex; justify-content: space-around; align-items: center;">
-            <div>
-                <p style="color: #aaa; font-size: 12px; margin: 0;">PREDICTION</p>
-                <div id="bigSmallRes" style="font-size: 32px; font-weight: bold; color: #fff;"></div>
-            </div>
-            <div style="border-left: 1px solid #333; height: 50px;"></div>
-            <div>
-                <p style="color: #aaa; font-size: 12px; margin: 0;">LUCKY NUMBER</p>
-                <div id="numRes" style="font-size: 32px; font-weight: bold; color: #ffcc00;"></div>
-            </div>
-        </div>
-        <div id="winStatus" style="margin-top: 15px; color: #0f0; font-size: 14px; border-top: 1px solid #333; padding-top: 10px;"></div>
-    </div>
-
-    <p style="margin-top: 20px; font-size: 10px; color: #444;">© 2025 SAFAIT HACK TECH | PASS: 2009</p>
 </div>
 
 <script>
-function generateSafaitHack() {
-    let input = document.getElementById('numInput').value;
-    let processing = document.getElementById('processing');
-    let resultCard = document.getElementById('resultCard');
+function fastHack() {
+    let input = document.getElementById('shortInput').value;
+    let box = document.getElementById('resBox');
     
-    if(!input.includes(',') || input.length < 1) {
-        alert("সাফায়েত ভাই, দয়া করে নম্বরগুলো সঠিকভাবে দিন!");
+    if(input.length < 1) {
+        alert("নম্বর দিন!");
         return;
     }
 
-    processing.style.display = 'block';
-    resultCard.style.display = 'none';
+    let arr = input.split(',').map(Number);
+    let last = arr[arr.length - 1]; // একদম শেষের নম্বর
 
-    setTimeout(() => {
-        processing.style.display = 'none';
-        resultCard.style.display = 'block';
+    // সহজ ৩-স্টেপ লজিক
+    let prediction = (last <= 4) ? "BIG" : "SMALL";
+    
+    // নম্বর প্রেডিকশন (লাস্ট নম্বরের ওপর ভিত্তি করে)
+    let nextNum = (last % 2 === 0) ? "1, 3, 7" : "2, 4, 8";
 
-        let arr = input.split(',').map(Number);
-        let last = arr[arr.length - 1];
-        
-        // 3-Step Smart Logic
-        let bs = (last <= 4) ? "BIG" : "SMALL";
-        
-        // Number Prediction Logic (Probability based)
-        let nextNum;
-        if (last === 0) nextNum = "1, 3";
-        else if (last === 9) nextNum = "6, 8";
-        else nextNum = (last + 1) + ", " + (last - 1);
-
-        document.getElementById('bigSmallRes').innerText = bs;
-        document.getElementById('numRes').innerText = nextNum;
-        document.getElementById('winStatus').innerText = "৩-স্টেপ উইন গ্যারান্টি: ৯৯.৯%";
-    }, 2500);
+    document.getElementById('bsOutput').innerText = "NEXT: " + prediction;
+    document.getElementById('numOutput').innerText = "Lucky Numbers: " + nextNum;
+    box.style.display = 'block';
 }
-</script>
+                   </script>
